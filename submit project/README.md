@@ -12,7 +12,7 @@ Complete a month cost analysis of each Azure resource to give an estimate total 
 
 ## Architecture Explanation
 This is a placeholder section where you can provide an explanation and reasoning for your architecture selection for both the Azure Web App and Azure Function.
-    ### Answer: After migrate the application web app to an Azure App Service and update the notification logic code using service bus queue messgae. I see
+    ### Answer:
         - With Web App:
             I used the Basic tier with autoscaling becuase app service provides a managed environment with easy scaling options. The basic tier offers a good balance between cost and performance.
             + Detailed Info:
@@ -26,19 +26,8 @@ This is a placeholder section where you can provide an explanation and reasoning
                         Operating System: Linux
                         SKU and size: Dynamic Y1
                         Service Tier: Consumption plan
-        - With Azure Postgres Database: 
-            + Detailed Info:
-                        Pricing tier: Burstable
-                        Compute size: Standard_B1ms (1 vCore, 2 GiB memory, 640 max iops)
-                        Storage: 128 GiB
-                        Storage Auto-growth: Disabled
-        - With Service Bus Namespace: 
-            + Detailed Info:
-                        Pricing tier: Basic
-                        Host name: sb-proj3.servicebus.windows.net
-        - With Storage account: 
-            + Detailed Info:
-                        Performance: Standard
-                        Replication: Locally-redundant storage (LRS)
-                        Account kind: StorageV2 (general purpose v2)
+    Detailed Info: After migrating the application web app to an Azure App Service and refactoring the notification logic to an Azure Function via a service bus queue message:
+        - Scalable web application to handle varying loads and provides a scalable environment that can automatically adjust resources based on demand, this scalability ensures cost-effectiveness as you only pay for what you use.
+        - Once the admin sends a notification, it won't take so long now because now I use Azure Functions with a service bus queue, the notification process is transferred to a serverless. This allows the web application to remain responsive, while the function processes notifications asynchronously, reducing the workload on the web application and ensuring quick delivery of notifications.
+        - Current architecture optimized for performance and cost by I combined the app service and Functions allows the application to be cost-effective by optimizing resource. The App Service will ensure the web application runs efficiently, while Functions will allow for scalable, processing of notifications, reducing costs by using resources during actual function execution.
 
